@@ -15,16 +15,16 @@ app.get("/", (req, res) => {
   res.send("Visit http://localhost:3001/api");
 });
 
-app.use("/api/auth", auth);
+app.post("/", (req, res) => {
+  res.send();
+});
+
+app.all("/api/auth", auth); //middleware
 app.use("/api/messages", messages);
 
-// app.get("/send", (req, res) =>
-//   res.sendFile(path.join(__dirname, "public/send.html"))
-// );
-
-// app.get("/paths", (req, res) =>
-//   res.sendFile(path.join(__dirname, "public/paths.html"))
-// );
+app.put("/user", (req, res) => {
+  res.send();
+});
 
 app.listen(PORT, () =>
   console.log(`Server listening at http://localhost:${PORT}`)
