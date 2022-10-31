@@ -42,8 +42,8 @@ router.post('/', (req, res) => {
 });
 
 // updates list based on id
-router.put('/:id', (req, res) => {
-    List.update(
+router.put('/:id', async (req, res) => {
+    const updatedList = await List.update(
         {
             item_name: req.body.item_name,
             purchased: req.body.purchased
@@ -52,26 +52,18 @@ router.put('/:id', (req, res) => {
         where: {
             id: req.params.id,
         },
-    }).then((updatedList) => {
-        res.json(updatedList);
-    })
-    .catch((err) => {
-        console.log(err);
-        res.json(err);
     });
+    res.json(updatedList);
 });
 
 // Deletes an item based on id
-router.delete('./:id', (req,res) => {
-    List.destroy({
+router.delete('./:id', async (req,res) => {
+    const deletedListItem = await List.destroy({
         where: {
             id: req.params.id,
         },
-    })
-    .then((deletedListItem) => {
-        res.json(deletedListItem);
-    })
-    .catch((err) => res.json(err));
+    });
+  res.json(deletedListItem);
 });
 
 module.exports = router;
