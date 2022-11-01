@@ -20,6 +20,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // app.get("/", (req, res) => res.send("Navigate to /send or /routes"));
 
+app.get('/', function (req, res) {
+  res.render('homepage');
+});
 // app.get("/send", (req, res) =>
 //   res.sendFile(path.join(__dirname, "public/send.html"))
 // );
