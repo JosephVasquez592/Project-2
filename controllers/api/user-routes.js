@@ -39,21 +39,26 @@ router.get("/:id", (req, res) => {
 });
 
 // POST /api/users - adds a new user to the database
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   // req.body is used because the body of the JSON object being passed through the route should have all the pertinent information to create a new user (username, email, and password)
-  User.create(req.body)
-    .then((userData) => {
-      req.session.save(() => {
-        req.session.user_id = userData.id;
-        req.session.username = userData.username;
-        // Establishes a loggedIn variable and sets it to true
-        req.session.loggedIn = true;
+  try {
+    const userData = await User.create({
+      username: req.body.username,
+      email: req.body.email,
+      password: req.body.password,
+    });
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.username = userData.username;
+      // Establishes a loggedIn variable and sets it to true
+      req.session.loggedIn = true;
 
-        res.json(userData);
-      });
-    })
+      res.json(userData);
+    });
+  } catch (err) {
     // Basic error catching
-    .catch((err) => res.status(500).json(err));
+    res.status(500).json(err);
+  }
 });
 
 // PUT /api/users/:id - updates a specific user in the database
