@@ -17,16 +17,19 @@ async function signUpFormHandler(event) {
   if (email && username && password) {
     try {
       // Posts a new user to the database
-      const response = await axios.post("api/users", {
+      const response = await axios.post("api/user", {
         email,
         username,
         password,
       });
       // Sends the new user to their dashboard
-      document.location.replace("/dashboard");
+      if (response.ok) {
+        document.location.replace("/dashboard");
+      }
     } catch (err) {
       window.alert(err.response.data.message);
     }
+    console.log(email, username, password);
   }
   // Checks each input field and provides a visual alert for required fields that are empty
   else {
@@ -47,7 +50,7 @@ async function loginFormHandler(event) {
   if (email && password) {
     try {
       // Posts a user's login credentials to the database for verification
-      const response = await axios.post("api/users/login", {
+      const response = await axios.post("api/user/login", {
         email,
         password,
       });
