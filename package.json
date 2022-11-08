@@ -19,12 +19,6 @@
     "express-handlebars": "^6.0.6",
     "express-session": "^1.17.3",
     "mysql2": "^2.2.5",
-<<<<<<< HEAD
-    "sequelize": "^6.3.5",
-    "date-fns": "^2.29.3",
-    "express-handlebars": "^6.0.6"
-=======
     "sequelize": "^6.3.5"
->>>>>>> 7499a800e4a480c67219f09d69c07cb5ecfcd5c3
   }
 }
